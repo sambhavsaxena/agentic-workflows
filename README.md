@@ -9,6 +9,6 @@ Ref: [https://langchain-ai.github.io/langgraph/](https://langchain-ai.github.io/
 
 Until, I last week I came across [bolt.new](https://bolt.new). I used it, and was amazed by the beauty and simplicity of the output it gave:
 
-![image](https://github.com/user-attachments/assets/24b7e8e6-a1b4-41be-b528-f3b52198b09a)
+![image](https://github.com/user-attachments/assets/58d7cef2-457a-4fa8-b29e-8596096d3286)
 
 This got me thinking, how in the world, something so powerful that it could eradicate jobs of frontend specialists, has already been created and people are still wondering why they're not getting responses for frontend roles they're applying to? Because obviously, they don't need frontend engineers anymore.
