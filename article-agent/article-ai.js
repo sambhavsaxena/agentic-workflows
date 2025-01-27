@@ -15,9 +15,11 @@ const generate_article = async (prompt) => {
             content: `The response to this prompt must start with a suitable title as the first line, but must not explicitly contain the word "title", and category of the write-up as the last word. Prompt: ${prompt}`
         }],
     });
-    const title = response.choices[0].message.content.split("\n")[0].replace(/[^a-zA-Z0-9\s]/g, '');
-    const content = response.choices[0].message.content.split("\n").slice(1).join("\n");
-    const category = content.split(" ").slice(-1)[0].replace(/[^a-zA-Z0-9\s]/g, '');
+    const fullContent = response.choices[0].message.content;
+    const lines = fullContent.split('\n');
+    const title = lines.shift().trim().replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '');
+    const category = lines.pop().trim().replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '');
+    const content = lines.join('\n').trim();
     return { title, content, category };
 }
 
