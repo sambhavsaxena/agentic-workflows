@@ -38,7 +38,7 @@ app.use(express.json());
  * Messages are used as direct prompts by the OpenAI SDK.
  * it has two parameters, role and content.
  * Role: https://platform.openai.com/docs/guides/text-generation#messages-and-roles
- * content is the JSON object that is passed to the OpenAI API.
+ * content is the JSON object that is passed to the OpenAI API that explains the specific question w.r.t the context.
  */
 const messages = [{ role: "developer", content: DEVELOPER_PROMPT }];
 
@@ -69,8 +69,8 @@ app.post('/chat', async (req, res) => {
 		else if (call.state == "ACTION") {
 			const fx = tools[call.function];
 			const function_output = await fx(call.input);
-			const obs = { state: "OBSERVATION", value: function_output };
-			messages.push({ role: "developer", content: JSON.stringify(obs) });
+			const observation = { state: "OBSERVATION", value: function_output };
+			messages.push({ role: "developer", content: JSON.stringify(observation) });
 		}
 	}
 });
