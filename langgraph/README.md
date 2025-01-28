@@ -6,7 +6,7 @@ LangGraph is flexible, allowing users to build custom agent architectures, such 
 
 But I plan to hardcode the entire LangGraph for now, lol.
 
-For now, I have used [Tavily Search](https://tavily.com/) in order to connect the dumb LLM to the internet, further adding [nodes](/langgraph/langgraph-agent.py) so as to replicate a state machine, which can replicate the workflows in accordance with Turing's concepts.
+For now, I have used [Tavily Search](https://tavily.com/) in order to connect the dumb LLM to the internet, further adding [nodes](/langgraph/langgraph-agent.py) so as to replicate a state machine, which can then replicate the workflows in accordance with Turing's concepts.
 
 ![image](https://github.com/user-attachments/assets/23e30385-d169-4712-8f1a-bea8d371a964)
 
