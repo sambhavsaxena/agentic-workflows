@@ -39,3 +39,22 @@ For example: `Hy Agent, plese wrte a sympthetix messge about the terroist attck 
 Provided that the agent have its tools in place, it will seamlessly understand what I meant, and soon there will be a tweet made on my behalf. Or grocery a shopping order, or booking movie tickets, anything a human would have to do otherwise.
 
 This is something we will be experimenting here. Stay tuned;)
+
+### What's next?
+
+- I have created something that looks like a service fulfilled by a common dumb AI. Its a random REST call to make a dumb LLM generate an article / story for me. Something that I have already done in [article-ai.js](/article-agent/article-ai.js).
+
+- Next, I created a basic agent which can **understand natural language** and can get us weather information from a free API. Implementation [here](/weather-agent/index.js).
+Ref: [Building AI Agent from Scratch](https://www.youtube.com/watch?v=vUYnRGotTbo)
+
+- The above two steps are now combined to create a full-fledged agent that can write a story based on **natural language inputs** and can post them on my blog website using my **login information**, ensuring that these credentials are not exposed to the dumb LLM or on the internet, as it is being executed on my local environment.
+
+Implementation here: [article-agent.js](/article-agent/article-agent.js)
+
+But, did you notice something common among the above two agents?
+
+Both of them have somewhat similar code written for their guiding state machines, the only difference being the [DEVELOPER_PROMPT](/article-agent/prompt.js).
+
+Smart.
+
+Next, let's play around with some real world data. I am thinking of **stock indices**.
