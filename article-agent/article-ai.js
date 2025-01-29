@@ -3,8 +3,12 @@ import OpenAI from "openai";
 import express from "express";
 
 dotenv.config();
+
 const BEARER_TOKEN = process.env.BEARER_TOKEN;
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const PORT = process.env.PORT || 3000;
+
+const openai = new OpenAI({ apiKey: OPENAI_API_KEY});
 
 const generate_article = async (prompt) => {
     console.log("Executing generate_article with prompt:", prompt);
@@ -55,23 +59,21 @@ const tools = {
 const app = express();
 app.use(express.json());
 
-app.post('/generate-and-post-article', async (req, res) => {
+app.post('/generate-and-post-article', async (req, res) => {    // the code configurationally handling the functions to be called
     const { prompt } = req.body;
-
     try {
         const article = await tools.generate_article(prompt);
         const { title, content, category } = article;
         const postedArticle = await tools.post_article(title, content, category);
-        res.json({
+        return res.json({
             message: "The article has been successfully created and posted.",
             article: postedArticle
         });
     } catch (error) {
-        res.status(500).json({ error: "An error occurred while generating or posting the article." });
+        return res.status(500).json({ error: "An error occurred while generating or posting the article." });
     }
 });
 
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

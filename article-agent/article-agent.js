@@ -4,7 +4,10 @@ import express from "express";
 import DEVELOPER_PROMPT from "./prompt.js";
 
 dotenv.config();
+
 const BEARER_TOKEN = process.env.BEARER_TOKEN;
+const PORT = process.env.PORT || 3000;
+
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const generate_article = async (topic) => {
@@ -96,7 +99,6 @@ app.get('/', (req, res) => {
 	res.send("GET is working!");
 });
 
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
