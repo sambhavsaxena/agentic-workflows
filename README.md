@@ -58,3 +58,9 @@ Both of them have somewhat similar code written for their guiding state machines
 Smart.
 
 Next, let's play around with some real world data. I am thinking of **stock indices**.
+
+UPDATE: [finance-agent](./finance-agent/README.md) can now do wonders.
+
+Next up, I'm thinking of placing orders or booking rides maybe? But that's possible only if Amazon / Uber provides an SDK for that.
+
+Keep exploring, cheers ;)
