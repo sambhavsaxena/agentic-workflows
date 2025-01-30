@@ -4,16 +4,19 @@ import express from "express";
 import DEVELOPER_PROMPT from "./prompt.js";
 
 dotenv.config();
-const API_KEY = process.env.API_KEY;
-const API_HOST = process.env.API_HOST;
+
 const PORT = process.env.PORT || 3000;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const API_KEY = process.env.API_KEY;
+const API_HOST = process.env.API_HOST;
 const ENDPOINT = process.env.ENDPOINT;
 
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
-const get_stock_information = async (stock_ticker) => {
-    const url = `${ENDPOINT}/stock-overview?symbol=${stock_ticker}&language=en`;
+const get_data_from_child_ref = async (child_ref, query_params) => {
+    const params = typeof query_params === 'string' ? JSON.parse(query_params) : query_params;
+    const queryString = new URLSearchParams(params).toString();
+    const url = `${ENDPOINT}/${child_ref}${queryString ? `?${queryString}` : ''}`;
     const options = {
         method: 'GET',
         headers: {
@@ -24,14 +27,14 @@ const get_stock_information = async (stock_ticker) => {
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        return result;
+        return result.data;
     } catch (error) {
         return { error: 'Error fetching stock data' };
     }
-}
+};
 
 const tools = {
-    get_stock_information: get_stock_information
+    get_data_from_child_ref: get_data_from_child_ref
 }
 
 const log_message = (message) => {
@@ -68,8 +71,7 @@ app.post('/chat', async (req, res) => {
             return res.json({ response: call.response });
         }
         else if (call.state == "ACTION") {
-            const fx = tools[call.function];
-            const function_output = await fx(call.input);
+            const function_output = await tools[call.function](call.child_ref, call.query_params);
             const observation = { state: "OBSERVATION", value: function_output };
             messages.push({ role: "developer", content: JSON.stringify(observation) });
         }
