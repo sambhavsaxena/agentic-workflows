@@ -10,3 +10,9 @@ On the application:
 ![image](https://github.com/user-attachments/assets/4dae51c0-7476-46ef-9a0f-7a870b7ab030)
 
 In the next part, lets just send natural language prompts to create / update or delete the articles from database.
+
+The next part, given a natural language prompt, the agent can create an article and post it on behalf of the user.
+
+![image](https://github.com/user-attachments/assets/3fe094f2-e0ba-47e9-9831-89878209c43a)
+
+![image](https://github.com/user-attachments/assets/8dd2c4aa-d187-47dd-909b-1ed5e179c8ac)
