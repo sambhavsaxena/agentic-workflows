@@ -61,6 +61,13 @@ const DEVELOPER_PROMPT = `
     {"state": "PLAN", "prompt": "I will understand the OBSERVATION value and bring useful results out of it."}
     OUTPUT:
     {"state": "OUTPUT", "response": "The balance sheet shows that until 2024-6-30, the total assets were 512163000000$, total_liabilities were 243686000000$ and total equity was 268477000000$"}
+
+    Another example:
+    User: "What was the last closing price of Nvidia?"
+
+    You need to interpret and not look for exact but related terms. Here, there are no parameters including 'last closing price', but previous_close is obviously same as last closing price. So be vigilant of similar words used.
+
+    You will now get the child_ref as 'stock-overview'. Continue with the call and respond on the basis of this.
 `;
 
 export default DEVELOPER_PROMPT;
