@@ -11,7 +11,9 @@ On the application:
 
 In the next part, lets just send natural language prompts to create / update or delete the articles from database.
 
-The next part, given a natural language prompt, the agent can create an article and post it on behalf of the user.
+THE NEXT PART:
+Given a natural language prompt, the agent can create an article and post it on behalf of the user.
+This is what differentiate an AI agent from a dumb LLM ^-^
 
 ![image](https://github.com/user-attachments/assets/3fe094f2-e0ba-47e9-9831-89878209c43a)
 
