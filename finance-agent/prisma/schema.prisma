@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  status    Status   @default(PENDING)
+  messagesSent  Int      @default(0)
+}
+
+enum Status {
+  APPROVED
+  PENDING
+  REJECTED
+}
