@@ -8,6 +8,8 @@ interface Message {
   owner: string;
 }
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 const Chat = () => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([]);
@@ -36,7 +38,7 @@ const Chat = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:3000/chat", {
+      const response = await axios.post(`${BASE_URL}/chat`, {
         email,
         prompt: newMessage,
       });
