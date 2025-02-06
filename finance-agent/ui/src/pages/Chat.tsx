@@ -36,7 +36,7 @@ const Chat = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`https://agentx.onrender.com/chat`, {
+      const response = await axios.post(`/api/chat`, {
         email,
         prompt: newMessage,
       });

@@ -24,7 +24,7 @@ const Onboarding = () => {
 		setMessage("");
 
 		try {
-			const response = await axios.post(`https://agentx.onrender.com/login`, {
+			const response = await axios.post(`/api/login`, {
 				email,
 			});
 			switch (response.status) {
