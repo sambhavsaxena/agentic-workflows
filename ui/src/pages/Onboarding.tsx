@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Bot } from "lucide-react";
 import axios from "axios";
 
-const BASE_URL = import.meta.env.BASE_URL;
-
 const Onboarding = () => {
 	const [email, setEmail] = useState("");
 	const [status, setStatus] = useState<
@@ -26,7 +24,7 @@ const Onboarding = () => {
 		setMessage("");
 
 		try {
-			const response = await axios.post(`${BASE_URL}/login`, {
+			const response = await axios.post(`https://agentic-workflows.onrender.com/login`, {
 				email,
 			});
 			switch (response.status) {
