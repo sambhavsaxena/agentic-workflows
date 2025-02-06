@@ -2,10 +2,10 @@ import dotenv from "dotenv";
 import path from "path";
 import OpenAI from "openai";
 import express from "express";
-import nodemailer from "nodemailer"
+import nodemailer from "nodemailer";
 import DEVELOPER_PROMPT from "./prompt.js";
 import { PrismaClient } from "@prisma/client";
-import cors from "cors"
+import cors from "cors";
 
 const prisma = new PrismaClient();
 dotenv.config();
@@ -40,23 +40,22 @@ const get_data_from_child_ref = async (child_ref, query_params) => {
 
 const tools = {
     get_data_from_child_ref: get_data_from_child_ref
-}
+};
 
 const log_message = (message) => {
     console.log(`${new Date().toLocaleTimeString()} -> ${message}`);
-}
+};
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"] 
+}));
+
+app.options('*', cors());
 app.use(express.json());
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-});
 
 const messages = [{ role: "developer", content: DEVELOPER_PROMPT }];
 
@@ -103,7 +102,6 @@ app.post('/api/chat', async (req, res) => {
                 messages.push({ role: "developer", content: JSON.stringify(observation) });
             }
         }
-
     } catch (error) {
         console.error("Error in /chat:", error);
         res.status(500).json({ error: "An error occurred during chat." });
