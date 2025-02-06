@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "client": "npm start --prefix ui",
+    "client": "npm run dev --prefix ui",
     "postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ui && npm install && npm run build --prefix ui"
   },
   "keywords": [],
