@@ -36,7 +36,7 @@ const Chat = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`https://agentic-workflows.onrender.com/chat`, {
+      const response = await axios.post(`https://agentx.onrender.com/chat`, {
         email,
         prompt: newMessage,
       });

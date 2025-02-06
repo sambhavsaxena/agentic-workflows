@@ -4,7 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "client": "npm start --prefix ui",
+    "postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ui && npm install && npm run build --prefix ui"
   },
   "keywords": [],
   "author": "",

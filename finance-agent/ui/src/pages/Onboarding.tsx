@@ -24,7 +24,7 @@ const Onboarding = () => {
 		setMessage("");
 
 		try {
-			const response = await axios.post(`https://agentic-workflows.onrender.com/login`, {
+			const response = await axios.post(`https://agentx.onrender.com/login`, {
 				email,
 			});
 			switch (response.status) {

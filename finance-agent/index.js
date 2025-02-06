@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import path from "path";
 import OpenAI from "openai";
 import express from "express";
 import nodemailer from "nodemailer"
@@ -51,7 +52,7 @@ app.use(express.json());
 
 const messages = [{ role: "developer", content: DEVELOPER_PROMPT }];
 
-app.post('/chat', async (req, res) => {
+app.post('/api/chat', async (req, res) => {
     const { email, prompt } = req.body;
     try {
         let user = await prisma.user.findUnique({
@@ -101,10 +102,6 @@ app.post('/chat', async (req, res) => {
     }
 });
 
-app.get('/', (req, res) => {
-    res.send("GET is working!");
-});
-
 const transporter = nodemailer.createTransport({
     service: process.env.EMAIL_SERVICE,
     secure: true,
@@ -114,7 +111,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     const { email } = req.body;
     let user = await prisma.user.findUnique({
         where: { email }
@@ -154,6 +151,18 @@ app.post('/login', async (req, res) => {
         return res.status(200).json({ user });
     }
 });
+
+const __dirname = path.resolve();
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "/ui/dist")));
+    app.get("*", (req, res) =>
+        res.sendFile(path.resolve(__dirname, "ui", "dist", "index.html"))
+    );
+} else {
+    app.get('/', (req, res) => {
+        res.send("GET is working!");
+    });
+}
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
