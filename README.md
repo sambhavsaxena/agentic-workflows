@@ -63,4 +63,6 @@ UPDATE: [finance-agent](./finance-agent/README.md) can now do wonders.
 
 Next up, I'm thinking of placing orders or booking rides maybe? But that's possible only if Amazon / Uber provides an SDK for that.
 
+Later on, an agent of agents?
+
 Keep exploring, cheers ;)

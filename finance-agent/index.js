@@ -1,8 +1,12 @@
 import dotenv from "dotenv";
 import OpenAI from "openai";
 import express from "express";
+import nodemailer from "nodemailer"
 import DEVELOPER_PROMPT from "./prompt.js";
+import { PrismaClient } from "@prisma/client";
+import cors from "cors"
 
+const prisma = new PrismaClient();
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
@@ -42,44 +46,113 @@ const log_message = (message) => {
 }
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const messages = [{ role: "developer", content: DEVELOPER_PROMPT }];
 
 app.post('/chat', async (req, res) => {
-    const { prompt } = req.body;
-    const query = {
-        state: "START",
-        prompt: prompt
-    }
-    log_message(JSON.stringify(query));
-    messages.push({ role: "user", content: JSON.stringify(query) });
-    while (1) {
-        const chat = await openai.chat.completions.create({
-            model: "gpt-4o-mini",
-            messages: messages,
-            response_format: { type: "json_object" }
+    const { email, prompt } = req.body;
+    try {
+        let user = await prisma.user.findUnique({
+            where: { email }
         });
-
-        const result = chat.choices[0].message.content;
-        messages.push({ role: "assistant", content: result });
-
-        log_message(result);
-
-        const call = JSON.parse(result);
-        if (call.state == "OUTPUT") {
-            return res.json({ response: call.response });
+        if (!user) {
+            return res.status(401).json({ response: "Unauthorized" });
         }
-        else if (call.state == "ACTION") {
-            const function_output = await tools[call.function](call.child_ref, call.query_params);
-            const observation = { state: "OBSERVATION", value: function_output };
-            messages.push({ role: "developer", content: JSON.stringify(observation) });
+        if (user.messagesSent >= 10) {
+            return res.status(403).json({ error: "Message limit exceeded." });
         }
+        const query = {
+            state: "START",
+            prompt: prompt
+        };
+        log_message(JSON.stringify(query));
+        messages.push({ role: "user", content: JSON.stringify(query) });
+        while (1) {
+            const chat = await openai.chat.completions.create({
+                model: "gpt-4o-mini",
+                messages: messages,
+                response_format: { type: "json_object" }
+            });
+            const result = chat.choices[0].message.content;
+            messages.push({ role: "assistant", content: result });
+
+            log_message(result);
+
+            const call = JSON.parse(result);
+
+            if (call.state == "OUTPUT") {
+                await prisma.user.update({
+                    where: { id: user.id },
+                    data: { messagesSent: { increment: 1 } }
+                });
+                return res.json({ response: call.response });
+            } else if (call.state == "ACTION") {
+                const function_output = await tools[call.function](call.child_ref, call.query_params);
+                const observation = { state: "OBSERVATION", value: function_output };
+                messages.push({ role: "developer", content: JSON.stringify(observation) });
+            }
+        }
+
+    } catch (error) {
+        console.error("Error in /chat:", error);
+        res.status(500).json({ error: "An error occurred during chat." });
     }
 });
 
 app.get('/', (req, res) => {
     res.send("GET is working!");
+});
+
+const transporter = nodemailer.createTransport({
+    service: process.env.EMAIL_SERVICE,
+    secure: true,
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD
+    }
+});
+
+app.post('/login', async (req, res) => {
+    const { email } = req.body;
+    let user = await prisma.user.findUnique({
+        where: { email }
+    });
+
+    if (!user) {
+        try {
+            user = await prisma.user.create({
+                data: {
+                    email,
+                    status: "PENDING"
+                }
+            });
+            const mailOptions = {
+                from: process.env.EMAIL_USER,
+                to: process.env.APPROVING_EMAIL,
+                subject: 'Account Approval Request',
+                html: `<p>A new user with the email ${email} has signed up. Please approve their account.</p>`
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.error("Error sending email:", error);
+                    return res.status(201).json({ user, message: "User created, but email failed to send." });
+                } else {
+                    console.log("Email sent: " + info.response);
+                    return res.status(201).json({ user, message: "User created, approval email sent." });
+                }
+            });
+
+        } catch (error) {
+            console.error("Error creating user:", error);
+            return res.status(500).json({ message: "Error creating user", error });
+        }
+    } else if (user.status === "PENDING") {
+        return res.status(401).json({ message: "User pending approval" });
+    } else if (user.status === "APPROVED") {
+        return res.status(200).json({ user });
+    }
 });
 
 app.listen(PORT, () => {
