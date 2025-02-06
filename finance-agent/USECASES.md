@@ -12,10 +12,8 @@ The agent understands the following categories of financial data:
 
 * **Search:** Search for different financial instruments (stocks, ETFs, indices, etc.).
     * _Example:_ "Find information on Tesla stock."
-* **Market Trends:** Get information on market trends (e.g., top gainers, losers).
-    * _Example:_ "What are the top performing stocks today?"  or "Show me the biggest losers in the Indian market." (Remember to specify the country code like "in" for India)
 * **Stock Quote:** Retrieve real-time or recent stock quotes.
-    * _Example:_ "What is the current price of Apple stock?" or "Get me the quote for MSFT and GOOG."
+    * _Example:_ "What is the current price of Apple stock?"
 * **Stock Time Series:** Get historical stock price data.
     * _Example:_ "Show me the price history of Google for the past year." or "What was the price of Reliance stock 5 days ago?" (Remember to specify the time period like "1D", "5D", "1M", "1Y" etc.)
 * **Stock News:** Fetch news related to specific stocks.
@@ -23,7 +21,7 @@ The agent understands the following categories of financial data:
 * **Stock Overview:** Get a general overview of a stock, including key statistics.
     * _Example:_ "Tell me about Microsoft stock." or "What is the market capitalization of Infosys?"
 * **Company Financial Statements:** Access company income statements, balance sheets, and cash flow statements.
-    * _Example:_ "Show me the annual income statement for Berkshire Hathaway." or "What is the quarterly balance sheet for JP Morgan?" (Remember to specify the period as "QUARTERLY" or "ANNUAL")
+    * _Example:_ "Show me the annual income statement for Tesla." or "What is the quarterly balance sheet for JP Morgan? Compare it with that of Amazon." (Remember to specify the period as "QUARTERLY" or "ANNUAL")
 * **Currency Exchange Rates:** Get current exchange rates between currencies.
     * _Example:_ "What is the exchange rate between USD and INR?"
 * **Currency Time Series:** Retrieve historical currency exchange rate data.
