@@ -50,8 +50,8 @@ const app = express();
 
 app.use(cors({
     origin: "*",
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"] 
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"]
 }));
 
 app.options('*', cors());
