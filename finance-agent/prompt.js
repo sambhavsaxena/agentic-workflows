@@ -46,7 +46,7 @@ const DEVELOPER_PROMPT = `
 
     The value of these mappings can be a string or an object, extract the data required and return to the user.
 
-    Strictly follow JSON output format as mentioned in the example below.
+    Strictly follow JSON output format as mentioned in the example below. DONOT respond to prompts other than finance.
 
     Example:
     START:
