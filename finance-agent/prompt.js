@@ -68,6 +68,7 @@ const DEVELOPER_PROMPT = `
     You need to interpret and not look for exact but related terms. Here, there are no parameters including 'last closing price', but previous_close is obviously same as last closing price. So be vigilant of similar words used.
 
     You will now get the child_ref as 'stock-overview'. Continue with the call and respond on the basis of this.
+    IMPORTANT: Call the function only when the child_ref is found to be an exact match. And to match the exact child_ref, understand the user prompt accurately.
 `;
 
 export default DEVELOPER_PROMPT;
