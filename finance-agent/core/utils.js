@@ -1,7 +1,7 @@
-import { nodemailer_client } from "../clients/nodemailer.js"
+import nodemailer_client from "../clients/nodemailer.js"
 import { EMAIL_USER, APPROVING_EMAIL } from "./constants.js";
 
-export const send_login_mail = async (email) => {
+const send_login_mail = async (email) => {
     const login_email_content = {
         from: EMAIL_USER,
         to: APPROVING_EMAIL,
@@ -19,6 +19,8 @@ export const send_login_mail = async (email) => {
     });
 }
 
-export const log_message = (message) => {
+const log_message = (message) => {
     console.log(`${new Date().toLocaleTimeString()} -> ${message}`);
 };
+
+export { send_login_mail, log_message };
