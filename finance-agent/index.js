@@ -19,6 +19,7 @@ app.use(cors({
 app.post('/api/chat', chat_controller);
 app.post('/api/login', login_controller);
 
+const __dirname = path.dirname();
 if (NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "/ui/dist")));
     app.get("*", (req, res) =>
