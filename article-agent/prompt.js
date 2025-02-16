@@ -4,25 +4,17 @@ const DEVELOPER_PROMPT = `
     Once you get the OBSERVATION, return the AI response based on the START prompt and OBSERVATION.
 
     Available Tools:
-    - generate_article(topic: string): { title, content, category }
-    generate_article is a function that takes the topic of an article as the argument and returns an object of title, content and category.
-
     - post_article(title: string, content: string, category: string): {title, content, category, user, _id, createdAt, updatedAt, __v}
-    post_article is a function that takes the object returned from generate_article as an input and returns the object having title, content, category, user, _id, createdAt, updatedAt and __v.
+    post_article is a function that takes an object  with keys: {title, content, category} as an input and returns the object having title, content, category, user, _id, createdAt, updatedAt and __v.
 
     Strictly follow JSON output format as mentioned in the example below.
+    IMPORTANT: The write-up must contain at least 500 words.
 
     Example:
     START:
     {"state": "START", "prompt": "Write an article about a Mermaid's lost jewel."}
     PLAN:
-    {"state": "PLAN", "prompt": "I will call the generate_article function with argument as Mermaid's Lost Jewel."}
-    ACTION:
-    {"state": "ACTION", "function": "generate_article", "input": "Mermaid's Lost Jewel"}
-    OBSERVATION:
-    {"state": "OBSERVATION", "value": "{title: "A mermaid's tale",content: "A mermaid once lived under the sea among many other sea-beings...",category: "Fiction"}"}
-    PLAN:
-    {"state": "PLAN", "prompt": "I will call the post_article function with "A mermaid's tale", "A mermaid once lived under the sea among many other sea-beings...", "Fiction" enclosing them in a single object."}
+    {"state": "PLAN", "prompt": "I will generate an article / story based on the user prompt, create suitable title, content and category for the write-up, and call the post_article function passing them as parameters."}
     ACTION:
     {"state": "ACTION", "function": "post_article", "input": {"A mermaid's tale", "A mermaid once lived under the sea among many other sea-beings...", "Fiction"}}
     OBSERVATION:

@@ -10,22 +10,6 @@ const PORT = process.env.PORT || 3000;
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const generate_article = async (topic) => {
-    const response = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [{
-            role: "user",
-            content: `Write something about ${topic}. The response to this prompt must start with a suitable title as the first line, but must not explicitly contain the word "title", and category of the write-up as the last word but must not explicitly contain the word "category".`
-        }],
-    });
-    const fullContent = response.choices[0].message.content;
-    const lines = fullContent.split('\n');
-    const title = lines.shift().trim().replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '');
-    const category = lines.pop().trim().replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '');
-    const content = lines.join('\n').trim();
-    return { title, content, category };
-}
-
 const post_article = async ({ title, content, category }) => {
     try {
         const response = await fetch('https://ikigai-p9nl.onrender.com/api/articles/create', {
@@ -49,7 +33,6 @@ const post_article = async ({ title, content, category }) => {
 }
 
 const tools = {
-    generate_article: generate_article,
     post_article: post_article
 }
 
@@ -74,7 +57,8 @@ app.post('/generate-and-post-article', async (req, res) => {
 		const chat = await openai.chat.completions.create({
 			model: "gpt-4o-mini",
 			messages: messages,
-			response_format: { type: "json_object" }
+			response_format: { type: "json_object" },
+            temperature: 1.2
 		});
 
 		const result = chat.choices[0].message.content;
