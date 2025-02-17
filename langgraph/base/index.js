@@ -4,33 +4,43 @@ import { MemorySaver } from "@langchain/langgraph";
 import { HumanMessage } from "@langchain/core/messages";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import dotenv from "dotenv"
+import express from "express"
+import cors from "cors"
+
+const app = express();
+app.use(express.json());
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"]
+}));
 
 dotenv.config();
 
-const agentTools = [new TavilySearchResults({ maxResults: 3 })];
-const agentModel = new ChatOpenAI({ temperature: 0, model: 'gpt-4o-mini'});
+const tools = [new TavilySearchResults({ maxResults: 3 })];
+const openai = new ChatOpenAI({ temperature: 0.1, model: process.env.AI_MODEL });
 
-const agentCheckpointer = new MemorySaver();
+const memory = new MemorySaver();
 const agent = createReactAgent({
-  llm: agentModel,
-  tools: agentTools,
-  checkpointSaver: agentCheckpointer,
+  llm: openai,
+  tools: tools,
+  checkpointSaver: memory,
 });
 
-const agentFinalState = await agent.invoke(
-  { messages: [new HumanMessage("Tell me some news about earthquake in delhi on 17th February, 2025.")] },
-  { configurable: { thread_id: "42" } },
-);
+const get_response = async (message) => {
+  const agentState = await agent.invoke(
+    { messages: [new HumanMessage(message)] },
+    { configurable: { thread_id: 1 } },
+  );
+  return agentState.messages[agentState.messages.length - 1].content;
+}
 
-console.log(
-  agentFinalState.messages[agentFinalState.messages.length - 1].content,
-);
+app.post('/api/chat', async (req, res) => {
+  const { prompt } = req.body;
+  const response = await get_response(prompt);
+  res.json({ "response": response });
+});
 
-const agentNextState = await agent.invoke(
-  { messages: [new HumanMessage("How many occur every year?")] },
-  { configurable: { thread_id: "42" } },
-);
-
-console.log(
-  agentNextState.messages[agentNextState.messages.length - 1].content,
-);
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});
