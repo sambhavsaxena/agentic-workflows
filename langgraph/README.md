@@ -22,6 +22,8 @@ Up next is a multi-agent collaboration?
 
 But before that, I have to create a follow-up of the finance-agent I created from scratch.
 
-Update: Did this in a few days.
+**Update**: Did this in a few days.
 
 Here's a demo of the same:
+
+https://github.com/user-attachments/assets/807589db-d78f-4a49-a000-7396215df4a9
