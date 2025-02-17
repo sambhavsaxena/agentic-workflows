@@ -1,5 +1,0 @@
-langchain-anthropic
-langchain-community
-langchain-core
-langgraph
-typing-extensions

@@ -1,0 +1,20 @@
+{
+  "name": "langgraph",
+  "version": "1.0.0",
+  "description": "LangGraph is a Python library for creating stateful, multi-agent applications with large language models (LLMs), designed to build agent and multi-agent workflows. It provides fine-grained control over agent applications' flow and state, offering features like memory persistence (storing conversation context) and human-in-the-loop workflows (allowing for interruptions and manual adjustments). LangGraph is inspired by Pregel and Apache Beam and is built on LangChain, though it can be used independently, which I aim to do with these experiments.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/community": "^0.3.30",
+    "@langchain/core": "^0.3.40",
+    "@langchain/langgraph": "^0.2.46",
+    "@langchain/openai": "^0.4.4",
+    "dotenv": "^16.4.7"
+  }
+}

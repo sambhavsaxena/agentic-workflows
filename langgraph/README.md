@@ -6,7 +6,7 @@ LangGraph is flexible, allowing users to build custom agent architectures, such 
 
 But I plan to hardcode the entire LangGraph for now, lol.
 
-For now, I have used [Tavily Search](https://tavily.com/) in order to connect the dumb LLM to the internet, further adding [nodes](/langgraph/langgraph-agent.py) so as to replicate a state machine, which can then replicate the workflows in accordance with Turing's concepts.
+For now, I have used [Tavily Search](https://tavily.com/) in order to connect the dumb LLM to the internet, further adding [nodes](./base/index.js) so as to replicate a state machine, which can then replicate the workflows in accordance with Turing's concepts.
 
 ![image](https://github.com/user-attachments/assets/23e30385-d169-4712-8f1a-bea8d371a964)
 
@@ -14,3 +14,8 @@ Here's how it looks in working:
 
 https://github.com/user-attachments/assets/91ec2f22-4946-47af-a315-5462a16a77b5
 
+Not just finance, Tavily provides the entirety of content available on the internet, and it updates every moment.
+
+Also, just migrated the langgraph base template to JavaScript, I already have APIs to integrate it with a web app so I thought it would be easy to stick to that.
+
+Up next is a multi-agent collaboration?
