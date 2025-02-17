@@ -3,7 +3,7 @@ import openai from "../clients/openai.js"
 import { send_login_mail, log_message } from "./utils.js";
 import { get_data_from_rapid_api, get_stocks } from "./tools.js";
 import RAPID_PROMPT from "../prompts/rapid-api.js"; // interacts with finance APIs hosted on Rapid
-import GROWW_PROMPT from "../prompts/groww.js"  // Groww custom APIs
+import CUSTOM_SDK_PROMPT from "../prompts/custom-sdk.js"  // interacts with APIs exposed by custom SDK
 
 const tools = {
     get_data_from_rapid_api: get_data_from_rapid_api,
@@ -36,7 +36,7 @@ const login_controller = async (req, res) => {
 }
 
 const chat_controller = async (req, res) => {
-    const messages = [{ role: "developer", content: GROWW_PROMPT }];
+    const messages = [{ role: "developer", content: RAPID_PROMPT }];
     const { email, prompt } = req.body;
     try {
         let user = await prisma.user.findUnique({
