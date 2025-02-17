@@ -19,3 +19,9 @@ Not just finance, Tavily provides the entirety of content available on the inter
 Also, just migrated the langgraph base template to JavaScript, I already have APIs to integrate it with a web app so I thought it would be easy to stick to that.
 
 Up next is a multi-agent collaboration?
+
+But before that, I have to create a follow-up of the finance-agent I created from scratch.
+
+Update: Did this in a few days.
+
+Here's a demo of the same:
