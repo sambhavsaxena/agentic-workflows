@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MessageSquare, Send, Loader2, LogOut } from "lucide-react";
 import axios from "axios";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   content: string;
@@ -77,8 +78,7 @@ const Chat = () => {
           <LogOut
             onClick={logout}
             className="h-6 w-6 text-emerald-500 mx-5 cursor-pointer"
-          />{" "}
-          {/* Added cursor-pointer */}
+          />
         </div>
       </header>
 
@@ -97,7 +97,11 @@ const Chat = () => {
                   : "bg-gray-700 text-white"
               }`}
             >
-              <p>{message.content}</p> {/* Use message.content */}
+              {message.owner === "ai" ? (
+                <ReactMarkdown>{message.content}</ReactMarkdown>
+              ) : (
+                <p>{message.content}</p>
+              )}
             </div>
           </div>
         ))}
