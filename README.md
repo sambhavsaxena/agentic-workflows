@@ -66,3 +66,12 @@ Next up, I'm thinking of placing orders or booking rides maybe? But that's possi
 Later on, an agent of agents?
 
 Keep exploring, cheers ;)
+
+**UPDATE**
+
+So after experimenting with different types of tools, I ran out of credits while I was drawing close to some conclusions, but what I achieved was enough to make a realization.
+
+The realization is, its not that straight-forward to make a dumb machine to complete tasks that a human mind does effortlessly. Although, they're getting smart each passing day, end of the day, these machines are really dumb when it comes to real world tasks, and creative tasks.
+
+I have been working on a project that can generate articles for me, and post them on my blog. But the problem is, the articles are not that good. They're not even close to what a human can write. And the reason is, these machines are not creative. They can't think out of the box. They can't think of a new idea, or a new concept, or a new way of doing things. They can only do what they're told to do, or if they're made to do something new, they just recognize similar patterns and repeat them, with a little tweaks here and there.
+
