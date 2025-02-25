@@ -40,7 +40,7 @@ Provided that the agent have its tools in place, it will seamlessly understand w
 
 This is something we will be experimenting here.
 
-### What's the progress?
+### What's being done?
 
 - I have created something that looks like a service fulfilled by a common dumb AI. Its a random REST call to make a dumb LLM generate an article / story for me. Something that I have already done in [article-ai.js](/article-agent/article-ai.js).
 
@@ -51,27 +51,36 @@ Ref: [Building AI Agent from Scratch](https://www.youtube.com/watch?v=vUYnRGotTb
 
 Implementation here: [article-agent.js](/article-agent/article-agent.js)
 
-But, did you notice something common among the above two agents?
-
-Both of them have somewhat similar code written for their guiding state machines, the only difference being the [DEVELOPER_PROMPT](/article-agent/prompt.js).
+But, did you notice something common among the above two agents? Both of them have somewhat similar code written for their guiding state machines, the only difference being the [DEVELOPER_PROMPT](/article-agent/prompt.js).
 
 Smart.
 
 Next, let's play around with some real world data. I am thinking of **stock indices**.
 
-UPDATE: [finance-agent](./finance-agent/README.md) can now do wonders.
+UPDATE: [finance-agent](./finance-agent/README.md) can now do wonders. But there's a catch. It gets ambiguous when its made to decide on.
 
 Next up, I'm thinking of placing orders or booking rides maybe? But that's possible only if Amazon / Uber provides an SDK for that.
 
 Later on, an agent of agents?
 
-Keep exploring, cheers ;)
-
-**UPDATE**
+### Conclusion
 
 So after experimenting with different types of tools, I ran out of credits while I was drawing close to some conclusions, but what I achieved was enough to make a realization.
 
 The realization is, its not that straight-forward to make a dumb machine to complete tasks that a human mind does effortlessly. Although, they're getting smart each passing day, end of the day, these machines are really dumb when it comes to real world tasks, and creative tasks.
 
-I have been working on a project that can generate articles for me, and post them on my blog. But the problem is, the articles are not that good. They're not even close to what a human can write. And the reason is, these machines are not creative. They can't think out of the box. They can't think of a new idea, or a new concept, or a new way of doing things. They can only do what they're told to do, or if they're made to do something new, they just recognize similar patterns and repeat them, with a little tweaks here and there.
+And here's a simple graph deducing the same:
+![image](https://github.com/user-attachments/assets/b00561fa-be54-4852-b9da-8d61b53fa0ec)
 
+I have been working on projects that can generate articles for me, and post them on my blog. Or getting financial advice performing basic analysis and deciding on a call. Or booking tickets (unavailability of SDKs is another issue), or just anything with some complexity, they're not even close to what a human can do. And the reason is, these machines can't think out of the box and aren't intelligent enough to decide on their own. They can only do what they're told to do, or if they're made to do something new, they just recognize similar patterns based on the training dataset and repeat them, with a little tweaks here and there.
+
+Devs and quants tried to introduce something known as `temperature` of a model which could device complexity in their response. Even though, it meant to specify the depth and complexity to which the context has to be set, it rather generated incomprehensible phrases with symbols of no meaning. So there's still a long way to achieve basic intelligence, let alone general intelligence or super-intelligence?
+
+Worthy mentions:
+- [Tavily](https://tavily.com/)
+- [Langgraph](https://langchain-ai.github.io/langgraph/)
+- [Langflow](https://github.com/langflow-ai/langflow/)
+- [OpenAI](https://openai.com/)
+- [Anthropic](https://www.anthropic.com/)
+
+~
