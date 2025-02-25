@@ -70,7 +70,9 @@ So after experimenting with different types of tools, I ran out of credits while
 The realization is, its not that straight-forward to make a dumb machine to complete tasks that a human mind does effortlessly. Although, they're getting smart each passing day, end of the day, these machines are really dumb when it comes to real world tasks, and creative tasks.
 
 And here's a simple graph deducing the same:
-![image](https://github.com/user-attachments/assets/b00561fa-be54-4852-b9da-8d61b53fa0ec)
+
+![image](https://github.com/user-attachments/assets/f626b595-bbac-47af-b909-1dd819271231)
+
 
 I have been working on projects that can generate articles for me, and post them on my blog. Or getting financial advice performing basic analysis and deciding on a call. Or booking tickets (unavailability of SDKs is another issue), or just anything with some complexity, they're not even close to what a human can do. And the reason is, these machines can't think out of the box and aren't intelligent enough to decide on their own. They can only do what they're told to do, or if they're made to do something new, they just recognize similar patterns based on the training dataset and repeat them, with a little tweaks here and there.
 
