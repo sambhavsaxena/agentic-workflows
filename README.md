@@ -17,6 +17,10 @@ This got me thinking, how in the world something so powerful that it could eradi
 After experiencing this, I jumped on the internet to look for something that replicates what Bolt does. And immediately found [Hkirat](https://www.youtube.com/@harkirat1) making a [Bolt Clone](https://www.youtube.com/watch?v=ofHGE-85EIA).
 Later that week, I investigated the project structure and realized that there's not much of new concepts being used, what basically happened behind the scenes was, to my surprise, **Prompt Engineering**.
 
+Infact recently, in one of the interviews on Google Deepmind's CEO, [Pushmeet Kohli](https://research.google/people/105667), he seems to point at the same thing.
+
+[Watch here](https://youtu.be/EN9ZdSlvbsg?si=ZEW63d4RIb3Fqizu&t=876)
+
 We have been exposed to artificial intelligence for years, and are surrounded by products like Amazon Echo or Google Voice Assistant, which have been working on closed source AI models for a long time.
 
 After the launch of OpenAI's ChatGPT, access to these models went public. So now, anyone can make a personal Assistant in their premise, providing them exclusive information like account credentials, access to social handles, credit card information, which people otherwise won't have provided to Alexa, or Gemini, because they work on alien platforms. And hence, anyone can now have a service that can do anything in their premise and supervision.
